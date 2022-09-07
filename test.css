@@ -1,0 +1,52 @@
+.example-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.grid-wrapper {
+  flex: 1 1 0px;
+}
+
+#myGrid {
+  height: 50%;
+  width: 100%;
+  opacity: 0.9;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+h2{
+  padding:8%;
+  text-align:center;
+  font-size: 30px;; 
+  margin-top: 5px;
+  color: #193242;
+
+}
+html {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 0;
+  overflow: auto;
+   background: url('bg.jpg')  no-repeat center;
+    background-size: cover;
+   
+ 
+}
+
+body {
+  padding: 1rem;
+  overflow: auto;
+}
+
+
+

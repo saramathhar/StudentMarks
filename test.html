@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>JavaScript example</title>
+		<meta charSet="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<link rel="stylesheet" href="test.css"/>
+
+
+        <script> 
+    const gridOptions = {
+  columnDefs: [
+    { field: 'Name' },
+    { field: 'Mark', minWidth: 55 },
+  ],
+  defaultColDef: {
+    flex: 1,
+    minWidth: 110,
+    editable: true,
+    resizable: true,
+  },
+  rowData: getData(),
+  pinnedTopRowData: getPinnedTopData(),
+  pinnedBottomRowData: getPinnedBottomData(),
+  onRowEditingStarted: (event) => {
+    console.log('never called - not doing row editing');
+  },
+  onRowEditingStopped: (event) => {
+    console.log('never called - not doing row editing');
+  },
+  onCellEditingStarted: (event) => {
+    console.log('cellEditingStarted');
+  },
+  onCellEditingStopped: (event) => {
+    console.log('cellEditingStopped');
+  },
+};
+
+function getPinnedTopData() {
+  return [
+    {
+      Name: 'ArtiKeys Students name',
+      Mark: 'ArtiKeys Students mark ',
+    },
+  ];
+}
+
+function getPinnedBottomData() {
+  return [
+    {
+      Name: '',
+      Mark: '',
+     
+    },
+  ];
+}
+
+
+
+function onBtStartEditing(key, char, pinned) {
+  gridOptions.api.setFocusedCell(0, 'Mark', pinned);
+
+  gridOptions.api.startEditingCell({
+    rowIndex: 0,
+    colKey: 'Mark',
+    // set to 'top', 'bottom' or undefined
+    rowPinned: pinned,
+    key: key,
+    charPress: char,
+  });
+}
+
+function onBtNextCell() {
+  gridOptions.api.tabToNextCell();
+}
+
+
+
+function onBtWhich() {
+  var cellDefs = gridOptions.api.getEditingCells();
+  if (cellDefs.length > 0) {
+    var cellDef = cellDefs[0];
+    console.log(
+      'editing cell is: row = ' +
+        cellDef.rowIndex +
+        ', col = ' +
+        cellDef.column.getId() +
+        ', floating = ' +
+        cellDef.rowPinned
+    );
+  } else {
+    console.log('no cells are editing');
+  }
+}
+
+// setup the grid after the page has finished loading
+document.addEventListener('DOMContentLoaded', function () {
+  var gridDiv = document.querySelector('#myGrid');
+  new agGrid.Grid(gridDiv, gridOptions);
+});
+
+
+
+
+
+function getData() {
+  return [
+  {
+      Name: 'Waleed',
+      Mark: '72',
+    },
+    {
+      Name: 'Ahmad',
+      Mark: '83',
+    },
+    {
+      Name: 'Khaled',
+      Mark: '87',
+   
+    },
+    {
+      Name: 'Mohammed',
+      Mark: '92',
+     
+    },
+    {
+      Name: "Zaid",
+      Mark: "90",
+  
+    },
+    {
+      Name: "Ali",
+      Mark: "87",
+    
+    },
+
+  ];
+}
+
+		
+
+
+		
+        </script>
+	</head>
+
+
+    
+	<body>
+
+    
+
+    <center>
+    <div class="container">
+    	<h2 class="text-center mt-4 mb-4">ArtiKeys Database</h2>
+    	<div class="card">
+    	</div>
+        <div id="excel_data" class="mt-5"></div>
+    </div>
+    
+    
+    </center>
+  
+
+  </div>
+  
+
+
+
+
+		<div class="example-wrapper">
+			<div
+    style="margin-bottom: 5px; display: flex; justify-content: space-between"
+  >
+
+				<div>
+					<button onclick="onBtNextCell()">Edit student name </button>
+				</div>
+		
+			</div>
+			<div class="grid-wrapper">
+				<div id="myGrid" class="ag-theme-alpine">
+				</div>
+			</div>
+		
+		<script>var __basePath = './';</script>
+		<script src="https://unpkg.com/ag-grid-community@28.1.1/dist/ag-grid-community.min.js">
+		</script>
+		<script src="data.js">
+		</script>
+		<script src="main.js">
+		</script>
+	</body>
+	<link rel="stylesheet" href="styles.css"/>
+</html>
